@@ -1,17 +1,21 @@
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
 
+
 // Configuración de APIs
 const WEATHER_API_CONFIG = {
   weatherapi: {
-    key: 'INCLUIR_TU_API_KEY_AQUI', // Obtener en https://www.weatherapi.com/
+    key: process.env.WEATHER_API_KEY,
     baseUrl: 'https://api.weatherapi.com/v1',
-    getCurrentWeather: (lat, lon, apiKey) =>
-      `${WEATHER_API_CONFIG.weatherapi.baseUrl}/current.json?key=${apiKey}&q=${lat},${lon}&lang=es`
+    getCurrentWeather: (lat, lon, apiKey) => {
+      console.log(`Obteniendo datos del tiempo de WeatherAPI para lat: ${lat}, lon: ${lon} con key: ${apiKey}`);
+      return `${WEATHER_API_CONFIG.weatherapi.baseUrl}/current.json?key=${apiKey}&q=${lat},${lon}&lang=es`
+    }
+
   },
 
   openweathermap: {
-    key: 'INCLUIR_TU_API_KEY_AQUI', // Obtener en https://openweathermap.org/api
+    key: process.env.OPENWEATHER_API_KEY,
     baseUrl: 'https://api.openweathermap.org/data/2.5',
     getCurrentWeather: (lat, lon, apiKey) =>
       `${WEATHER_API_CONFIG.openweathermap.baseUrl}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=es`
