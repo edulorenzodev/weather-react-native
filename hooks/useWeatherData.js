@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 // Configuración de APIs
 const WEATHER_API_CONFIG = {
   weatherapi: {
-    key: '0dbcae07eb9f48ddbac180042241002',
+    key: 'INCLUIR_TU_API_KEY_AQUI', // Obtener en https://www.weatherapi.com/
     baseUrl: 'https://api.weatherapi.com/v1',
     getCurrentWeather: (lat, lon, apiKey) =>
       `${WEATHER_API_CONFIG.weatherapi.baseUrl}/current.json?key=${apiKey}&q=${lat},${lon}&lang=es`
   },
 
   openweathermap: {
-    key: '66e99b4ec888ece6fd299c7416db4695', // Obtener en https://openweathermap.org/api
+    key: 'INCLUIR_TU_API_KEY_AQUI', // Obtener en https://openweathermap.org/api
     baseUrl: 'https://api.openweathermap.org/data/2.5',
     getCurrentWeather: (lat, lon, apiKey) =>
       `${WEATHER_API_CONFIG.openweathermap.baseUrl}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=es`
@@ -50,6 +50,7 @@ const weatherProviders = {
       }
 
       const data = await response.json();
+      console.log(`Datos de WeatherAPI: ${JSON.stringify(data)}`);
 
       // Transformar datos de WeatherAPI al formato estándar
       return {
@@ -88,6 +89,7 @@ const weatherProviders = {
       }
 
       const data = await response.json();
+      console.log(`Datos de OpenWeather: ${JSON.stringify(data)}`);
 
       // Transformar datos de OpenWeatherMap al formato estándar
       return {
